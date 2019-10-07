@@ -13,13 +13,12 @@
  #tweeter-logo {
    color: #ffffff;
    font-family: 'Bungee', cursive;
-   display: inline-block;
+   float: left;
    margin: 1.5em;
  }
 
- #new-tweet {
+ #new-tweet-button {
    color: #ffffff;
-   display: inline-block;
    margin: 1.5em;
    float: right;
  }
