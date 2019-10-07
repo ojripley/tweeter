@@ -13,8 +13,12 @@ header {
   top: 20px;
 }
 
-#firstname {
+.name {
   font-family: 'Source Sans Pro', sans-serif;
   color: #ffffff;
-  font-weight: 700;
+  font-weight: bold;
+}
+
+#lastname {
+  font-weight: lighter;
 }
