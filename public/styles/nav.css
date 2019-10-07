@@ -1,4 +1,4 @@
- nav {
+ #nav {
    background-color: #4056A1;
    height: 120px;
    width: 100%;
@@ -11,15 +11,15 @@
  }
 
  #tweeter-logo {
-   color: #FFFFFF;
+   color: #ffffff;
    font-family: 'Bungee', cursive;
-   display: block;
+   display: inline-block;
    margin: 1.5em;
- };
+ }
 
- #new-tweet-button {
-   color: #FFFFFF;
-   font-family: 'Source Sans Pro', sans-serif;
-   display: block;
+ #new-tweet {
+   color: #ffffff;
+   display: inline-block;
    margin: 1.5em;
+   float: right;
  }

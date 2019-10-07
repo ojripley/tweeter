@@ -1,13 +1,20 @@
 header {
   width: 100%;
   height: 400px;
-  background-color: lightcoral;
+  position: relative;
+  top: 120px;
+  text-align: center;
+  background-color: #ba6600;
+  background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
 }
 
 #avatar {
-
+  position: relative;
+  top: 20px;
 }
 
-#username {
-
+#firstname {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #ffffff;
+  font-weight: 700;
 }
