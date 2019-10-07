@@ -15,14 +15,15 @@
    font-family: 'Bungee', cursive;
    float: left;
    margin: 1.5em;
- }
-
- #write {
-   font-weight: bold;
+   font-size: 20pt;
  }
 
  .new-tweet-button {
    color: #ffffff;
    margin: 1.5em;
    float: right;
+ }
+
+ #write {
+   font-weight: bold;
  }
