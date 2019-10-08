@@ -7,12 +7,19 @@
 const submitNewTweet = function() {
   event.preventDefault();
 
-  const serializedForm = $(event.target).serialize();
+  if ($(event.target).children('textarea').val().length === 0) {
+    alert('Tweet submissons cannot be empty!');
+  } else if ($(event.target).children('textarea').val().length > 140) {
+    alert('Tweet submissons must be 140 characters or shorter!');
+  } else {
+    const serializedForm = $(event.target).serialize();
 
-  $.ajax('/tweets', { method: 'POST', data: serializedForm })
-    .then(() => {
-      loadTweets();
-    });
+    $.ajax('/tweets', { method: 'POST', data: serializedForm })
+      .then(() => {
+        loadTweets();
+      });
+  }
+    
 };
 
 const dayDifference = function(dateInMilliseconds) {
@@ -56,7 +63,6 @@ const renderTweets = function(tweetArray) {
 const loadTweets = function() {
   $.ajax('/tweets', {method: 'GET'})
     .then((tweets) => {
-      console.log(tweets);
       // const arrayOfTweets = JSON.parse(tweets);
       // console.log(arrayOfTweets);
       renderTweets(tweets);
