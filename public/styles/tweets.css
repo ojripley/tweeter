@@ -1,5 +1,9 @@
-tweets {
+.tweet {
   background-color: white;
+  border: solid;
+  top: 3em;
+  position: relative;
+
 }
 
 .tweetedBy {
@@ -9,5 +13,12 @@ tweets {
 
 .username {
   float: right;
+  display: none;
   margin: 1em;
+}
+
+.tweet header {
+  margin: 0 auto;
+  height: 40px;
+  /* background-color: #f4f1ec; */
 }

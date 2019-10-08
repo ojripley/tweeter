@@ -1,5 +1,8 @@
 $(document).ready(function() {
   $('.tweet').on('mouseover', function() {
-    console.log('over here!');
+    $('.username').css({ display: 'inline' });
+  });
+  $('.tweet').on('mouseleave', function() {
+    $('.username').css({ display: 'none' });
   });
 });
