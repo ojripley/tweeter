@@ -1,24 +1,37 @@
 .tweet {
-  background-color: white;
+  background-color: #f4f1ec;
   border: solid;
   top: 3em;
   position: relative;
-
+  margin-bottom: 1em;
+  margin-top: 1em;
+  box-shadow: none;
 }
 
 .tweetedBy {
   float: left;
-  margin: 1em;
+  /* margin: 0.25em; */
 }
 
 .username {
   float: right;
   display: none;
-  margin: 1em;
+  /* margin: 0.25em; */
 }
 
 .tweet header {
-  margin: 0 auto;
-  height: 40px;
-  /* background-color: #f4f1ec; */
+  margin: 0.5em;
+  height: 20%;
+}
+
+.tweet .content {
+  margin: 1.5em;
+  padding: 1em;
+  border-bottom: solid;
+  font-size: 1;
+}
+
+.tweet footer {
+  height: 20%;
+  margin: 0.5em;
 }
