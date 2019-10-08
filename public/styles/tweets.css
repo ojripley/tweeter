@@ -8,14 +8,22 @@
   box-shadow: none;
 }
 
-.tweetedBy {
+.tweet .user-icon {
   float: left;
-  /* margin: 0.25em; */
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
-.username {
+.tweet .tweetedBy {
+  float: left;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.tweet .username {
   float: right;
   display: none;
+  color: #4056a1;
   /* margin: 0.25em; */
 }
 
@@ -34,4 +42,25 @@
 .tweet footer {
   height: 20%;
   margin: 0.5em;
+}
+
+.tweet .retweet-button {
+  color: #4056a1;
+  float: right;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.tweet .flag-button {
+  color: #4056a1;
+  float: right;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.tweet .like-button {
+  color: #4056a1;
+  float: right;
+  margin-right: 3px;
+  margin-left: 3px;
 }
