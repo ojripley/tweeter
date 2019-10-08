@@ -1,0 +1,13 @@
+tweets {
+  background-color: white;
+}
+
+tweets .name {
+  float: left;
+  margin: 1em;
+}
+
+tweets .username {
+  float: right;
+  margin: 1em;
+}
