@@ -32,18 +32,31 @@ const tweetArray = [
   }
 ];
 
-$(document).ready(() => {
-  
+const submitNewTweet = function() {
+  event.preventDefault();
 
-  const createTweetElement = function(tweetObject) {
-    // use jQuery to create new article element
-    const $tweet = $('<article>').addClass('tweet');
+  const serializedForm = $(event.target).serialize();
 
-    // determine age of tweet in days
-    const tweetAge = dayDifference(tweetObject.created_at);
+  $.ajax('/tweets', { method: 'POST', data: serializedForm })
+    .then(() => {
+      loadTweets();
+    });
+};
 
-    // append elements as children to article
-    $tweet.append(`<header>
+const dayDifference = function(dateInMilliseconds) {
+  // returns number of days passed since date
+  return Math.floor(((Date.now() - dateInMilliseconds) / 86400000));
+};
+
+const createTweetElement = function(tweetObject) {
+  // use jQuery to create new article element
+  const $tweet = $('<article>').addClass('tweet');
+
+  // determine age of tweet in days
+  const tweetAge = dayDifference(tweetObject.created_at);
+
+  // append elements as children to article
+  $tweet.append(`<header>
       <span class="user-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
       <span class="tweetedBy">${tweetObject.user.name}</span>
       <span class="username">${tweetObject.user.handle}</span>
@@ -56,21 +69,32 @@ $(document).ready(() => {
       <a class="retweet-button" href="http://www.twitter.com"><i class="fa fa-retweet" aria-hidden="true"></i></a>
       </footer>`);
 
-    // return the entire tweet object
-    return $tweet;
-  };
+  // return the entire tweet object
+  return $tweet;
+};
 
-  const renderTweets = function(tweetArray) {
-    // append each tweet to tweets container
-    for (let tweet of tweetArray) {
-      $('#tweets').append(createTweetElement(tweet));
-    }
-  };
+const renderTweets = function (tweetArray) {
+  // append each tweet to tweets container
+  for (let tweet of tweetArray) {
+    $('#tweets').append(createTweetElement(tweet));
+  }
+};
 
-  const dayDifference = function(dateInMilliseconds) {
-    // returns number of days passed since date
-    return Math.floor(((Date.now() - dateInMilliseconds) / 86400000));
-  };
+const loadTweets = function() {
+  $.ajax('/tweets', {method: 'GET'})
+    .then((tweets) => {
+      console.log(tweets);
+      const arrayOfTweets = JSON.parse(tweets);
+      renderTweets(arrayOfTweets);
+    });
+};
+
+$(document).ready(() => {
+  
+  
+  $('.new-tweet-form').on('submit', (event) => {
+    submitNewTweet(event);
+  });
 
   renderTweets(tweetArray);
 });
