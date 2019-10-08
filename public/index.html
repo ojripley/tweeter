@@ -35,8 +35,7 @@
     <!-- Top nav bar (fixed) -->
     <nav id="nav">
       <span id="tweeter-logo">tweeter</span>
-
-      <span class="new-tweet-button"><span id="write">Write</span> a new tweet</span>
+      <a class="new-tweet-button" href="#"><span id="write">Write</span> a new tweet</a>
     </nav>
 
     <header id="profileHeader">
@@ -50,7 +49,7 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
-        <h2>Compose Tweet</h2>
+        <div id="error-message"></div>
         <form class="new-tweet-form" action="/tweets" method="POST">
           <textarea id="textarea" name="text" placeholder="What are you humming about?" ></textarea>
           <input type="submit" value="Tweet">
@@ -61,6 +60,8 @@
       <div id="tweets">
         <!-- the tweets will be inserted here -->
       </div>
+
+      <button id="scrollToTop">^</button>
       <br id="footspace">
     </main>
   </body>
