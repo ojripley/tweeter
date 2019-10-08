@@ -1,0 +1,13 @@
+#scrollToTop {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 1em;
+  display: none;
+  border-radius: 100%;
+  overflow: hidden;
+  outline: 0;
+  color: white;
+  background-color: coral;
+  z-index: 2000;
+}

@@ -25,6 +25,10 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
+a {
+  outline: 0;
+}
+
 main {
   width: 90%;
   margin-left: 5%;

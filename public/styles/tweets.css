@@ -6,6 +6,7 @@
   margin-bottom: 1em;
   margin-top: 1em;
   box-shadow: none;
+  border-radius: 10px;
 }
 
 .tweet .user-icon {
