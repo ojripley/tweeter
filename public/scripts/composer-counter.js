@@ -1,6 +1,5 @@
 // document ready function lets us know when the DOM has loaded
 $(document).ready(function() {
-  console.log('the doc has been loaded');
   $('#textarea').on('input', function() {
 
     // determine number of characters remaining
