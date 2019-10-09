@@ -7,40 +7,27 @@
 // things to be run when the DOM has been loaded
 $(document).ready(() => {
 
+  // prep page on every load
   clearForm();
-
   loadTweets();
 
+  // new tweet submition handling
   $('.new-tweet-form').on('submit', (event) => {
     submitNewTweet(event);
   });
 
+  // new tweet button click handling
   $('.new-tweet-button').on('click', () => {
     showForm();
   });
 
+  // scroll position handling
   $(window).scroll(function() {
     const scrollPosition = $(window).scrollTop();
-
-    // for displaying scrollToTop button
-    if (scrollPosition > 100) {
-      $('.new-tweet-button').slideUp();
-      $('#scrollToTop').slideDown();
-    } else if (scrollPosition < 100) {
-      $('.new-tweet-button').slideDown();
-      $('#scrollToTop').slideUp();
-    }
-
-    // for changing logo colour
-    if (scrollPosition > 350) {
-      if ($(window).width() < 768) {
-        $('#tweeter-logo').css({ color: 'coral' });
-      }
-    } else if (scrollPosition < 350) {
-      $('#tweeter-logo').css({ color: 'white' });
-    }
+    handleScrollPosition(scrollPosition);
   });
 
+  // scroll to top button handling
   $('#scrollToTop').on('click', () => {
     const scrollButton = $('#scrollToTop');
     scrollToTop(scrollButton);
@@ -64,7 +51,6 @@ const submitNewTweet = function() {
     $('.new-tweet-button').slideDown();
 
     const serializedForm = $(event.target).serialize();
-
     clearForm();
 
     $('.new-tweet').slideUp();
@@ -72,6 +58,9 @@ const submitNewTweet = function() {
     $.ajax('/tweets', { method: 'POST', data: serializedForm })
       .then(() => {
         loadTweets();
+      })
+      .catch((e) => {
+        console.log(`Error loading tweets`);
       });
   }
 };
@@ -162,24 +151,31 @@ const renderTweets = function(tweetArray) {
 const loadTweets = function() {
   // makes an ajax get request to the server for tweets
   // calls render tweets to display them
+
   $.ajax('/tweets', {method: 'GET'})
     .then((tweets) => {
       renderTweets(tweets);
+    })
+    .catch((e) => {
+      console.log(`Error loading tweets`);
     });
 };
 
 
 const showForm = function() {
   // shows the compose tweet form and shifts cursor focus to the textarea
+
   $('.new-tweet').slideDown(() => {
     $('#textarea').focus();
   });
   $('.new-tweet-button').slideUp();
 };
 
+
 const isValidTweet = function() {
   // returns true if tweet is valid
   // displays an error to the user if otherwise
+
   if ($(event.target).children('textarea').val().length === 0) {
     $('#error-message').text('Tweet submissons cannot be empty!');
     $('#error-message').slideDown();
@@ -193,6 +189,7 @@ const isValidTweet = function() {
 
 const scrollToTop = function(scrollButton) {
   // handles animations for scrolling to the top
+
   scrollButton.animate({ bottom: 30 }, 275, () => {
     scrollButton.animate({ bottom: -30 }, 200, () => {
       scrollButton.css({ display: 'none' });
@@ -201,5 +198,25 @@ const scrollToTop = function(scrollButton) {
   });
   $(window).scrollTop(0);
   $('.new-tweet').slideDown();
+};
 
+
+const handleScrollPosition = function(scrollPosition) {
+  // for displaying scrollToTop button
+  if (scrollPosition > 100) {
+    $('.new-tweet-button').slideUp();
+    $('#scrollToTop').slideDown();
+  } else if (scrollPosition < 100) {
+    $('.new-tweet-button').slideDown();
+    $('#scrollToTop').slideUp();
+  }
+
+  // for changing logo colour
+  if (scrollPosition > 350) {
+    if ($(window).width() < 768) {
+      $('#tweeter-logo').css({ color: 'coral' });
+    }
+  } else if (scrollPosition < 350) {
+    $('#tweeter-logo').css({ color: 'white' });
+  }
 };
