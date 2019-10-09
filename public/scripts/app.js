@@ -4,111 +4,9 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const submitNewTweet = function() {
-  event.preventDefault();
-
-  $('#error-message').slideUp();
-
-  if ($(event.target).children('textarea').val().length === 0) {
-    $('#error-message').text('Tweet submissons cannot be empty!');
-    $('#error-message').slideDown();
-  } else if ($(event.target).children('textarea').val().length > 140) {
-    $('#error-message').text('Tweet submissons must be 140 characters or less!');
-    $('#error-message').slideDown();
-  } else {
-
-    $('.new-tweet-button').slideDown();
-
-    const serializedForm = $(event.target).serialize();
-    clearForm();
-
-    $.ajax('/tweets', { method: 'POST', data: serializedForm })
-      .then(() => {
-        loadTweets();
-      });
-  }
-    
-};
-
-const clearForm = function() {
-  $('.new-tweet-form')[0].reset();
-  $('.counter').text(140);
-};
-
-const ageString = function(dateInMilliseconds) {
-  
-  const difference = (Date.now() - dateInMilliseconds);
-
-  if (difference >= 86400000) {
-    return `${Math.floor(difference / 86400000)} days ago`;
-  } else if (difference >= 3600000) {
-    return `${Math.floor(difference / 3600000)} hours ago`;
-  } else if (difference >= 60000) {
-    return `${Math.floor(difference / 60000)} minutes ago`;
-  } else {
-    return `${Math.floor(difference / 1000)} seconds ago`;
-  }
-};
-
-const createTweetElement = function(tweetObject) {
-
-  // determine age of tweet
-  const tweetAge = ageString(tweetObject.created_at);
-
-  // create the html that will define a new tweet
-  const tweetHTMLString = `
-    <article class="tweet">
-    <header>
-    <span class="user-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
-    <span class="tweetedBy">${practiceSafeText(tweetObject.user.name)}</span>
-    <span class="username">${practiceSafeText(tweetObject.user.handle)}</span>
-    </header>
-    <p class="content">${practiceSafeText(tweetObject.content.text)}</p>
-    <footer>
-    <span class="date">${tweetAge}</span>
-    <a class="flag-button" href="flag"><i class="fa fa-flag" aria-hidden="true"></i></a>
-    <a class="like-button" href="like"><i class="fa fa-heart" aria-hidden="true"></i></a>
-    <a class="retweet-button" href="http://www.staggeringbeauty.com/"><i class="fa fa-retweet" aria-hidden="true"></i></a>
-    </footer>
-    </article>`;
-
-  // return the entire tweet object
-  return tweetHTMLString;
-};
-
-const practiceSafeText = function(string) {
-  let div = document.createElement('div');
-  div.appendChild(document.createTextNode(string));
-  return div.innerHTML;
-};
-
-
-const renderTweets = function(tweetArray) {
-
-  const tweetsToBeLoadedArray = [];
-
-  $('#tweets').empty();
-  // append each tweet to tweets container
-  for (let i = tweetArray.length - 1; i >= 0; i--) {
-    
-    // putting the html into an array allows it to be joined into one string before appending it to the tweet container
-    // this means that we will only be manipulating the dom once to append an endless amount of tweets
-    tweetsToBeLoadedArray.push(createTweetElement(tweetArray[i]));
-    
-  }
-  // join array into a sinlge string before appending
-  $('#tweets').append(tweetsToBeLoadedArray.join(''));
-};
-
-const loadTweets = function() {
-  $.ajax('/tweets', {method: 'GET'})
-    .then((tweets) => {
-      renderTweets(tweets);
-    });
-};
-
+// things to be run when the DOM has been loaded
 $(document).ready(() => {
-  
+
   clearForm();
 
   loadTweets();
@@ -118,10 +16,7 @@ $(document).ready(() => {
   });
 
   $('.new-tweet-button').on('click', () => {
-    $('.new-tweet').slideDown(() => {
-      $('#textarea').focus();
-    });
-    $('.new-tweet-button').slideUp();
+    showForm();
   });
 
   $(window).scroll(function() {
@@ -147,13 +42,164 @@ $(document).ready(() => {
   });
 
   $('#scrollToTop').on('click', () => {
-    $('#scrollToTop').animate({bottom: 30}, 275, () => {
-      $('#scrollToTop').animate({bottom: -30}, 200, () => {
-        $('#scrollToTop').css({ display: 'none' });
-        $('#scrollToTop').css({ position: 'fixed', bottom: 0, right: 0 });
-      });
-    });
-    $(window).scrollTop(0);
-    $('.new-tweet').slideDown();
+    const scrollButton = $('#scrollToTop');
+    scrollToTop(scrollButton);
   });
 });
+
+
+const submitNewTweet = function() {
+  // handles new tweet submission
+  // displays errors for empty/too long tweets
+  // otherwise, serializes the form and posts to the database via ajax
+
+  event.preventDefault();
+
+  $('#error-message').slideUp();
+
+  // handle non valid tweets
+  if (isValidTweet()) {
+    
+    // replace the new tweet button so user can write more than one tweet... lol
+    $('.new-tweet-button').slideDown();
+
+    const serializedForm = $(event.target).serialize();
+
+    clearForm();
+
+    $('.new-tweet').slideUp();
+
+    $.ajax('/tweets', { method: 'POST', data: serializedForm })
+      .then(() => {
+        loadTweets();
+      });
+  }
+};
+
+
+const clearForm = function() {
+  // removes any existing text from the textarea and resets the counter
+
+  $('.new-tweet-form')[0].reset();
+  $('.counter').text(140);
+};
+
+
+const createAgeString = function(dateInMilliseconds) {
+  // assembles a string describing how many <units of time> ago of the tweet was created
+  
+  const difference = (Date.now() - dateInMilliseconds);
+
+  if (difference >= 86400000) {
+    return `${Math.floor(difference / 86400000)} days ago`;
+  } else if (difference >= 3600000) {
+    return `${Math.floor(difference / 3600000)} hours ago`;
+  } else if (difference >= 60000) {
+    return `${Math.floor(difference / 60000)} minutes ago`;
+  } else {
+    return `${Math.floor(difference / 1000)} seconds ago`;
+  }
+};
+
+
+const createTweetElement = function(tweetObject) {
+  // assembels an html string out of a tweet object
+  // returns the string
+
+  // determine age of tweet
+  const tweetAge = createAgeString(tweetObject.created_at);
+
+  // create the html that will define a new tweet
+  const tweetHTMLString = `
+    <article class="tweet">
+    <header>
+    <span class="user-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+    <span class="tweetedBy">${practiceSafeText(tweetObject.user.name)}</span>
+    <span class="username">${practiceSafeText(tweetObject.user.handle)}</span>
+    </header>
+    <p class="content">${practiceSafeText(tweetObject.content.text)}</p>
+    <footer>
+    <span class="date">${tweetAge}</span>
+    <a class="flag-button" href="flag"><i class="fa fa-flag" aria-hidden="true"></i></a>
+    <a class="like-button" href="like"><i class="fa fa-heart" aria-hidden="true"></i></a>
+    <a class="retweet-button" href="http://www.staggeringbeauty.com/"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+    </footer>
+    </article>`;
+
+  // return the entire tweet object
+  return tweetHTMLString;
+};
+
+
+const practiceSafeText = function(string) {
+  // escapes dangerous characters to prevent html injection
+
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(string));
+  return div.innerHTML;
+};
+
+
+const renderTweets = function(tweetArray) {
+  // clears tweets from the page, then assembles the array of tweets into a single string of html
+  // html will automatically unpack itself into the tweets when appended to the tweets container
+
+  const tweetsToBeLoadedArray = [];
+
+  $('#tweets').empty();
+  // append each tweet to tweets container
+  for (let i = tweetArray.length - 1; i >= 0; i--) {
+    
+    // putting the html into an array allows it to be joined into one string before appending it to the tweet container
+    // this means that we will only be manipulating the dom once to append an endless amount of tweets
+    tweetsToBeLoadedArray.push(createTweetElement(tweetArray[i]));
+  }
+  // join array into a sinlge string before appending
+  $('#tweets').append(tweetsToBeLoadedArray.join(''));
+};
+
+
+const loadTweets = function() {
+  // makes an ajax get request to the server for tweets
+  // calls render tweets to display them
+  $.ajax('/tweets', {method: 'GET'})
+    .then((tweets) => {
+      renderTweets(tweets);
+    });
+};
+
+
+const showForm = function() {
+  // shows the compose tweet form and shifts cursor focus to the textarea
+  $('.new-tweet').slideDown(() => {
+    $('#textarea').focus();
+  });
+  $('.new-tweet-button').slideUp();
+};
+
+const isValidTweet = function() {
+  // returns true if tweet is valid
+  // displays an error to the user if otherwise
+  if ($(event.target).children('textarea').val().length === 0) {
+    $('#error-message').text('Tweet submissons cannot be empty!');
+    $('#error-message').slideDown();
+  } else if ($(event.target).children('textarea').val().length > 140) {
+    $('#error-message').text('Tweet submissons must be 140 characters or less!');
+    $('#error-message').slideDown();
+  }
+
+  return true;
+};
+
+const scrollToTop = function(scrollButton) {
+  // handles animations for scrolling to the top
+  scrollButton.animate({ bottom: 30 }, 275, () => {
+    scrollButton.animate({ bottom: -30 }, 200, () => {
+      scrollButton.css({ display: 'none' });
+      scrollButton.css({ position: 'fixed', bottom: 0, right: 0 });
+    });
+  });
+  $(window).scrollTop(0);
+  $('.new-tweet').slideDown();
+
+};
