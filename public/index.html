@@ -3,12 +3,11 @@
 <html lang="en">
   <head>
 
-    <!-- prevent zooming -->
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-
-
     <!-- Meta Information -->
     <title>Tweeter - Home Page</title>
+
+    <!-- prevent zooming -->
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -42,9 +41,12 @@
     <nav id="nav">
       
     </nav>
+
+    <!-- fixed nav buttons -->
     <span id="tweeter-logo">tweeter</span>
     <a class="new-tweet-button" href="#"><span id="write">Write</span> a new tweet</a>
-      
+
+    <!-- Profile header (image and name) -->
     <header id="profileHeader">
       <div>
         <img src="/images/profile-hex.png" id="avatar">
@@ -53,7 +55,7 @@
       <h2 class="name">Firstname<span id="lastname"> Lastname</span></h2>
     </header>
 
-    <!-- Page-specific (main) content here -->
+    <!-- Page-specific (main) content -->
     <main class="container">
       <section class="new-tweet">
         <div id="error-message"></div>
@@ -65,10 +67,13 @@
       </section>
 
       <div id="tweets">
-        <!-- the tweets will be inserted here -->
+        <!-- the tweets will be inserted (via js in app.js) here -->
       </div>
 
+      <!-- fixed button that allows for quick scrolling to top -->
       <button id="scrollToTop"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+
+      <!-- to leave whitespace below the bottom most tweet -->
       <br id="footspace">
     </main>
   </body>
