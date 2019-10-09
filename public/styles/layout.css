@@ -29,6 +29,7 @@ a {
   outline: 0;
 }
 
+/* mobile styles by default */
 main {
   width: 90%;
   margin-left: 5%;
@@ -40,3 +41,5 @@ main {
 #footspace {
   margin: 50px;
 }
+
+/* tablet styles */
