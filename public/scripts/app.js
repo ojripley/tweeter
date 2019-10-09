@@ -110,7 +110,7 @@ $(document).ready(() => {
     $('.new-tweet').slideToggle();
   });
 
-  $(window).scroll(function(event) {
+  $(window).scroll(function() {
     const scrollPosition = $(window).scrollTop();
     if (scrollPosition > 400) {
       $('.new-tweet-button').slideUp();
