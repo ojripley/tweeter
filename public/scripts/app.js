@@ -179,9 +179,11 @@ const isValidTweet = function() {
   if ($(event.target).children('textarea').val().length === 0) {
     $('#error-message').text('Tweet submissons cannot be empty!');
     $('#error-message').slideDown();
+    return false;
   } else if ($(event.target).children('textarea').val().length > 140) {
     $('#error-message').text('Tweet submissons must be 140 characters or less!');
     $('#error-message').slideDown();
+    return false;
   }
 
   return true;
