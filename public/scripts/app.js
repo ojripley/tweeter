@@ -17,15 +17,10 @@ const submitNewTweet = function() {
     $('#error-message').slideDown();
   } else {
 
-    
+    $('.new-tweet-button').slideDown();
+
     const serializedForm = $(event.target).serialize();
     clearForm();
-
-
-
-
-
-
 
     $.ajax('/tweets', { method: 'POST', data: serializedForm })
       .then(() => {
@@ -122,8 +117,10 @@ $(document).ready(() => {
   });
 
   $('.new-tweet-button').on('click', () => {
-    console.log('clicked');
-    $('.new-tweet').slideToggle();
+    $('.new-tweet').slideDown(() => {
+      $('#textarea').focus();
+    });
+    $('.new-tweet-button').slideUp();
   });
 
   $(window).scroll(function() {
