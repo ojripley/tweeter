@@ -11,7 +11,7 @@ $(document).ready(function() {
     $(this).siblings('.counter').text(remaining);
     
     // change colour if no characters left
-    if (remaining < 1) {
+    if (remaining < 0) {
       $(this).siblings('.counter').css({ color: 'red' });
     } else {
       $(this).siblings('.counter').css({ color: '#545149' });

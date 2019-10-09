@@ -8,20 +8,19 @@ header#profileHeader {
   background-color: coral;
   background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
 }
-
-#avatar {
+header#profileHeader #avatar {
   position: relative;
   top: 60px;
 }
-
-.name {
+header#profileHeader .name {
   margin-top: 2em;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   color: #ffffff;
   font-size: 18pt;
   font-weight: bold;
 }
-
-#lastname {
+header#profileHeader #lastname {
   font-weight: lighter;
 }
+
+/*# sourceMappingURL=header.css.map */

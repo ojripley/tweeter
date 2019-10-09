@@ -32,6 +32,7 @@ const submitNewTweet = function() {
 
 const clearForm = function() {
   $('.new-tweet-form')[0].reset();
+  $('.counter').text(140);
 };
 
 const ageString = function(dateInMilliseconds) {
@@ -67,7 +68,7 @@ const createTweetElement = function(tweetObject) {
     <span class="date">${tweetAge}</span>
     <a class="flag-button" href="flag"><i class="fa fa-flag" aria-hidden="true"></i></a>
     <a class="like-button" href="like"><i class="fa fa-heart" aria-hidden="true"></i></a>
-    <a class="retweet-button" href="http://www.twitter.com"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+    <a class="retweet-button" href="http://www.staggeringbeauty.com/"><i class="fa fa-retweet" aria-hidden="true"></i></a>
     </footer>
     </article>`;
 
