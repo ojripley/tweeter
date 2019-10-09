@@ -1,21 +1,24 @@
 header#profileHeader {
-  width: 100%;
+  border-radius: 0;
   height: 400px;
   position: relative;
-  top: 120px;
+  margin: 0;
+  top: 0px;
   text-align: center;
-  background-color: #ba6600;
+  background-color: coral;
   background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
 }
 
 #avatar {
   position: relative;
-  top: 20px;
+  top: 60px;
 }
 
 .name {
+  margin-top: 2em;
   font-family: 'Source Sans Pro', sans-serif;
   color: #ffffff;
+  font-size: 18pt;
   font-weight: bold;
 }
 

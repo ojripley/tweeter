@@ -20,6 +20,13 @@ const submitNewTweet = function() {
     
     const serializedForm = $(event.target).serialize();
     clearForm();
+
+
+
+
+
+
+
     $.ajax('/tweets', { method: 'POST', data: serializedForm })
       .then(() => {
         loadTweets();
@@ -48,28 +55,29 @@ const ageString = function(dateInMilliseconds) {
 };
 
 const createTweetElement = function(tweetObject) {
-  // use jQuery to create new article element
-  const $tweet = $('<article>').addClass('tweet');
 
   // determine age of tweet
   const tweetAge = ageString(tweetObject.created_at);
 
-  // append elements as children to article
-  $tweet.append(`<header>
-      <span class="user-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
-      <span class="tweetedBy">${practiceSafeText(tweetObject.user.name)}</span>
-      <span class="username">${practiceSafeText(tweetObject.user.handle)}</span>
-      </header>
-      <p class="content">${practiceSafeText(tweetObject.content.text)}</p>
-      <footer>
-      <span class="date">${tweetAge}</span>
-      <a class="flag-button" href="flag"><i class="fa fa-flag" aria-hidden="true"></i></a>
-      <a class="like-button" href="like"><i class="fa fa-heart" aria-hidden="true"></i></a>
-      <a class="retweet-button" href="http://www.twitter.com"><i class="fa fa-retweet" aria-hidden="true"></i></a>
-      </footer>`);
+  // create the html that will define a new tweet
+  const tweetHTMLString = `
+    <article class="tweet">
+    <header>
+    <span class="user-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+    <span class="tweetedBy">${practiceSafeText(tweetObject.user.name)}</span>
+    <span class="username">${practiceSafeText(tweetObject.user.handle)}</span>
+    </header>
+    <p class="content">${practiceSafeText(tweetObject.content.text)}</p>
+    <footer>
+    <span class="date">${tweetAge}</span>
+    <a class="flag-button" href="flag"><i class="fa fa-flag" aria-hidden="true"></i></a>
+    <a class="like-button" href="like"><i class="fa fa-heart" aria-hidden="true"></i></a>
+    <a class="retweet-button" href="http://www.twitter.com"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+    </footer>
+    </article>`;
 
   // return the entire tweet object
-  return $tweet;
+  return tweetHTMLString;
 };
 
 const practiceSafeText = function(string) {
@@ -80,12 +88,20 @@ const practiceSafeText = function(string) {
 
 
 const renderTweets = function(tweetArray) {
+
+  const tweetsToBeLoadedArray = [];
+
   $('#tweets').empty();
   // append each tweet to tweets container
   for (let i = tweetArray.length - 1; i >= 0; i--) {
     
-    $('#tweets').append(createTweetElement(tweetArray[i]));
+    // putting the html into an array allows it to be joined into one string before appending it to the tweet container
+    // this means that we will only be manipulating the dom once to append an endless amount of tweets
+    tweetsToBeLoadedArray.push(createTweetElement(tweetArray[i]));
+    
   }
+  // join array into a sinlge string before appending
+  $('#tweets').append(tweetsToBeLoadedArray.join(''));
 };
 
 const loadTweets = function() {
@@ -112,13 +128,22 @@ $(document).ready(() => {
 
   $(window).scroll(function() {
     const scrollPosition = $(window).scrollTop();
-    if (scrollPosition > 400) {
+
+    // for displaying scrollToTop button
+    if (scrollPosition > 100) {
       $('.new-tweet-button').slideUp();
       $('#scrollToTop').slideDown();
-    } else if (scrollPosition < 400) {
+    } else if (scrollPosition < 100) {
       $('.new-tweet-button').slideDown();
       $('#scrollToTop').slideUp();
     }
+
+    // for changing logo colour
+    // if (scrollPosition > 250) {
+    //   $('#tweeter-logo').css({color: 'coral'});
+    // } else if (scrollPosition < 250) {
+    //   $('#tweeter-logo').css({ color: 'white' });
+    // }
   });
 
   $('#scrollToTop').on('click', () => {

@@ -19,6 +19,8 @@ body {
   background-color: #f4f1ec;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 /*
@@ -31,11 +33,9 @@ a {
 
 /* mobile styles by default */
 main {
-  width: 90%;
   margin-left: 5%;
   margin-right: 5%;
-  position: absolute;
-  top: 520px;
+  position: relative;
 }
 
 #footspace {
@@ -43,3 +43,55 @@ main {
 }
 
 /* tablet styles */
+@media screen and (min-width: 768px) {
+
+  body {
+    flex-direction: row;
+  }
+
+  header#profileHeader {
+    order: 1;
+    top: 120px;
+    border-radius: 10px;
+    flex-grow: 1;
+    margin: 2em;
+  }
+
+  main {
+    margin-top: 3em;
+    order: 2;
+    flex-shrink: 1;
+    width: 40%
+  }
+
+  #nav {
+    display: inline;
+  }
+
+  section.new-tweet {
+    margin-top: 100px;
+    margin-bottom: 40px;
+  }
+
+  .tweet {
+    top: 3em;
+  }
+
+  /* nav#nav {
+    
+  }
+
+  header#profileHeader {
+    width: 35%;
+  }
+
+  .container {
+    top: 100px;
+    width: 100%;
+    float: right;
+  }
+
+  #tweets {
+    float: right;
+  } */
+}
