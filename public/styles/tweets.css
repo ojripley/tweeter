@@ -38,6 +38,7 @@
   border-bottom: solid;
   font-size: 1;
   font-weight: bold;
+  overflow-wrap: break-word;
 }
 
 .tweet footer {

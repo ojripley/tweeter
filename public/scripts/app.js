@@ -59,7 +59,7 @@ const submitNewTweet = function() {
       .then(() => {
         loadTweets();
       })
-      .catch(() => {
+      .fail(() => {
         console.log(`Error loading tweets`);
       });
   }
@@ -156,7 +156,7 @@ const loadTweets = function() {
     .then((tweets) => {
       renderTweets(tweets);
     })
-    .catch(() => {
+    .fail(() => {
       console.log(`Error loading tweets`);
     });
 };
