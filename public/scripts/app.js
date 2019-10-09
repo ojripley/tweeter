@@ -4,10 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const displayScrollToTop = function() {
-  
-};
-
 const submitNewTweet = function() {
   event.preventDefault();
 
@@ -20,14 +16,20 @@ const submitNewTweet = function() {
     $('#error-message').text('Tweet submissons must be 140 characters or less!');
     $('#error-message').slideDown();
   } else {
-    const serializedForm = $(event.target).serialize();
 
+    
+    const serializedForm = $(event.target).serialize();
+    clearForm();
     $.ajax('/tweets', { method: 'POST', data: serializedForm })
       .then(() => {
         loadTweets();
       });
   }
     
+};
+
+const clearForm = function() {
+  $('.new-tweet-form')[0].reset();
 };
 
 const ageString = function(dateInMilliseconds) {
@@ -58,7 +60,7 @@ const createTweetElement = function(tweetObject) {
       <span class="tweetedBy">${practiceSafeText(tweetObject.user.name)}</span>
       <span class="username">${practiceSafeText(tweetObject.user.handle)}</span>
       </header>
-      <div class="content">${practiceSafeText(tweetObject.content.text)}</div>
+      <p class="content">${practiceSafeText(tweetObject.content.text)}</p>
       <footer>
       <span class="date">${tweetAge}</span>
       <a class="flag-button" href="flag"><i class="fa fa-flag" aria-hidden="true"></i></a>
@@ -95,6 +97,8 @@ const loadTweets = function() {
 
 $(document).ready(() => {
   
+  clearForm();
+
   loadTweets();
 
   $('.new-tweet-form').on('submit', (event) => {
@@ -106,18 +110,25 @@ $(document).ready(() => {
     $('.new-tweet').slideToggle();
   });
 
-  // $(window).resize(function(e) {
-  //   console.log(e);
-  // });
-
   $(window).scroll(function(event) {
     const scrollPosition = $(window).scrollTop();
     if (scrollPosition > 400) {
-      displayScrollToTop();
+      $('.new-tweet-button').slideUp();
+      $('#scrollToTop').slideDown();
     } else if (scrollPosition < 400) {
-      hideScrollToTop();
+      $('.new-tweet-button').slideDown();
+      $('#scrollToTop').slideUp();
     }
   });
 
-  
+  $('#scrollToTop').on('click', () => {
+    $('#scrollToTop').animate({bottom: 30}, 275, () => {
+      $('#scrollToTop').animate({bottom: -30}, 200, () => {
+        $('#scrollToTop').css({ display: 'none' });
+        $('#scrollToTop').css({ position: 'fixed', bottom: 0, right: 0 });
+      });
+    });
+    $(window).scrollTop(0);
+    $('.new-tweet').slideDown();
+  });
 });

@@ -34,6 +34,7 @@
 }
 
 .tweet .content {
+  word-break: break-all;
   margin: 1.5em;
   padding: 1em;
   border-bottom: solid;

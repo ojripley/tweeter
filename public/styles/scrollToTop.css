@@ -2,9 +2,9 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  margin: 1em;
+  margin: 0.5em;
   display: none;
-  border-radius: 100%;
+  border-radius: 50%;
   overflow: hidden;
   outline: 0;
   color: white;
