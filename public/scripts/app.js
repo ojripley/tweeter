@@ -11,18 +11,6 @@ $(document).ready(() => {
   clearForm();
   loadTweets();
 
-  // window.getComputedStyle(element).property
-
-
-  // const target = document.getElementsByClassName('.new-tweet');
-
-  // const MutationObserver = window.MutationObserver;
-  // const observer = new MutationObserver((mutations) => {
-  //   console.log(mutations);
-  // });
-  // observer.observe(target, {display: 'none'});
-  // listenForFormDisplay();
-
   // new tweet submition handling
   $('.new-tweet-form').on('submit', (event) => {
     submitNewTweet(event);
@@ -238,9 +226,4 @@ const handleScrollPosition = function(scrollPosition) {
   } else if (scrollPosition < 350) {
     $('#tweeter-logo').css({ color: 'white' });
   }
-};
-
-
-const listenForFormDisplay = function() {
-  
 };
