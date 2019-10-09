@@ -139,11 +139,11 @@ $(document).ready(() => {
     }
 
     // for changing logo colour
-    // if (scrollPosition > 250) {
-    //   $('#tweeter-logo').css({color: 'coral'});
-    // } else if (scrollPosition < 250) {
-    //   $('#tweeter-logo').css({ color: 'white' });
-    // }
+    if (scrollPosition > 250) {
+      $('#tweeter-logo').css({color: 'coral'});
+    } else if (scrollPosition < 250) {
+      $('#tweeter-logo').css({ color: 'white' });
+    }
   });
 
   $('#scrollToTop').on('click', () => {
