@@ -139,9 +139,11 @@ $(document).ready(() => {
     }
 
     // for changing logo colour
-    if (scrollPosition > 250) {
-      $('#tweeter-logo').css({color: 'coral'});
-    } else if (scrollPosition < 250) {
+    if (scrollPosition > 350) {
+      if ($(window).width() < 768) {
+        $('#tweeter-logo').css({ color: 'coral' });
+      }
+    } else if (scrollPosition < 350) {
       $('#tweeter-logo').css({ color: 'white' });
     }
   });
