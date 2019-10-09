@@ -11,6 +11,18 @@ $(document).ready(() => {
   clearForm();
   loadTweets();
 
+  // window.getComputedStyle(element).property
+
+
+  // const target = document.getElementsByClassName('.new-tweet');
+
+  // const MutationObserver = window.MutationObserver;
+  // const observer = new MutationObserver((mutations) => {
+  //   console.log(mutations);
+  // });
+  // observer.observe(target, {display: 'none'});
+  // listenForFormDisplay();
+
   // new tweet submition handling
   $('.new-tweet-form').on('submit', (event) => {
     submitNewTweet(event);
@@ -209,7 +221,12 @@ const handleScrollPosition = function(scrollPosition) {
     $('.new-tweet-button').slideUp();
     $('#scrollToTop').slideDown();
   } else if (scrollPosition < 100) {
-    $('.new-tweet-button').slideDown();
+
+    // evaluate display property of the new tweet form
+    if (window.getComputedStyle('.new-tweet').display === 'none') {
+      // only slide down the new tweet button if the form is not already displayed
+      $('.new-tweet-button').slideDown();
+    }
     $('#scrollToTop').slideUp();
   }
 
@@ -221,4 +238,9 @@ const handleScrollPosition = function(scrollPosition) {
   } else if (scrollPosition < 350) {
     $('#tweeter-logo').css({ color: 'white' });
   }
+};
+
+
+const listenForFormDisplay = function() {
+  
 };
