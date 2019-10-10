@@ -21,6 +21,7 @@ $(document).ready(() => {
     showForm();
   });
 
+  // submit tweet hover animation
   $('input').hover((event) => {
     $(event.target).css({ 'box-shadow': '#4056a1 3px 3px', 'background': 'white', 'color': 'coral', 'outline': 'none'});
   }, (event) => {
