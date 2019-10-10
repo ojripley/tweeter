@@ -10,6 +10,8 @@
   margin-top: 1em;
   margin-bottom: 1em;
   display: none;
+  border-radius: 3px;
+  text-align: center;
 }
 
 textarea {
