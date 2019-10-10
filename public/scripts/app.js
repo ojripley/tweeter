@@ -23,8 +23,9 @@ $(document).ready(() => {
 
   // scroll position handling
   $(window).scroll(function() {
+    let newTweet = document.querySelector('.new-tweet');
     const scrollPosition = $(window).scrollTop();
-    handleScrollPosition(scrollPosition);
+    handleScrollPosition(scrollPosition, newTweet);
   });
 
   // scroll to top button handling
@@ -203,7 +204,7 @@ const scrollToTop = function(scrollButton) {
 };
 
 
-const handleScrollPosition = function(scrollPosition) {
+const handleScrollPosition = function(scrollPosition, newTweet) {
   // for displaying scrollToTop button
   if (scrollPosition > 100) {
     $('.new-tweet-button').slideUp();
@@ -211,7 +212,7 @@ const handleScrollPosition = function(scrollPosition) {
   } else if (scrollPosition < 100) {
 
     // evaluate display property of the new tweet form
-    if (window.getComputedStyle('.new-tweet').display === 'none') {
+    if (window.getComputedStyle(newTweet).display === 'none') {
       // only slide down the new tweet button if the form is not already displayed
       $('.new-tweet-button').slideDown();
     }
