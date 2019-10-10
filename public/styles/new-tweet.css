@@ -1,6 +1,6 @@
 .new-tweet {
   display: none;
-  margin-bottom: 3em;
+  overflow: hidden;
 }
 
 #error-message {

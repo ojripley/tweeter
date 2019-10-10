@@ -59,6 +59,7 @@ main {
 
   main {
     margin-top: 3em;
+    padding-top: 3em;
     order: 2;
     flex-shrink: 1;
     width: 40%
@@ -69,11 +70,6 @@ main {
   }
 
   section.new-tweet {
-    margin-top: 100px;
     margin-bottom: 40px;
-  }
-
-  .tweet {
-    top: 3em;
   }
 }
