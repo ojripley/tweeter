@@ -23,7 +23,7 @@ $(document).ready(() => {
 
   // submit tweet hover animation
   $('input').hover((event) => {
-    $(event.target).css({ 'box-shadow': '#4056a1 3px 3px', 'background': 'white', 'color': 'coral', 'outline': 'none'});
+    $(event.target).css({ 'box-shadow': '3px 3px #4056a1', 'background': 'white', 'color': 'coral', 'outline': 'none'});
   }, (event) => {
     $(event.target).css({ 'box-shadow': 'none', 'background': '#4056a1', 'color': 'white', 'outline': 'none'});
   });

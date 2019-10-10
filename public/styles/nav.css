@@ -34,6 +34,16 @@
    z-index: 200;
  }
 
+  .new-tweet-button:hover {
+  font-size: 0.75em;
+  color: coral;
+  transition: 0.15s linear;
+ }
+
  #write {
    font-weight: bold;
+ }
+
+ #down-arrow {
+   text-align: center;
  }

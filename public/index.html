@@ -44,7 +44,7 @@
 
     <!-- fixed nav buttons -->
     <span id="tweeter-logo">tweeter</span>
-    <a class="new-tweet-button" href="#"><span id="write">Write</span> a new tweet</a>
+    <a class="new-tweet-button" href="#"><span id="write">Write</span> a new tweet<div id="down-arrow"><i class="fa fa-angle-double-down"></i></div></a>
 
     <!-- Profile header (image and name) -->
     <header id="profileHeader">
@@ -60,7 +60,7 @@
       <section class="new-tweet">
         <div id="error-message"></div>
         <form class="new-tweet-form" action="/tweets" method="POST">
-          <textarea id="textarea" name="text" placeholder="What are you humming about?" ></textarea>
+          <textarea id="textarea" name="text" placeholder="What's buzzing?" ></textarea>
           <input type="submit" value="Tweet">
           <span class="counter">140</span>
         </form>
