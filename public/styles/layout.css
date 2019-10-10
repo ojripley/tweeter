@@ -72,4 +72,12 @@ main {
   section.new-tweet {
     margin-bottom: 40px;
   }
+
+  #down-arrow {
+    color: coral;
+  }
+
+  .new-tweet-button:hover {
+    color: coral;
+  }
 }

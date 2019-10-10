@@ -23,7 +23,7 @@
 
 .tweet .username {
   float: right;
-  display: none;
+  visibility: hidden;
   color: #4056a1;
 }
 
@@ -44,6 +44,15 @@
 .tweet footer {
   height: 20%;
   margin: 0.5em;
+}
+
+.tweet:hover {
+  box-shadow: 7px 7px #4056a1;
+  transform: scale(1.05);
+}
+
+.tweet:hover .username {
+  visibility: visible;
 }
 
 .tweet .retweet-button {

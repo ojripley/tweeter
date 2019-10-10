@@ -36,8 +36,8 @@ $(document).ready(() => {
   });
 
   // scroll to top button handling
-  $('#scrollToTop').on('click', () => {
-    const scrollButton = $('#scrollToTop');
+  $('#scroll-to-top').on('click', () => {
+    const scrollButton = $('#scroll-to-top');
     scrollToTop(scrollButton);
   });
 });
@@ -201,10 +201,8 @@ const scrollToTop = function(scrollButton) {
   // handles animations for scrolling to the top
 
   scrollButton.animate({ bottom: 30 }, 275, () => {
-    scrollButton.animate({ bottom: -30 }, 200, () => {
-      scrollButton.css({ display: 'none' });
-      scrollButton.css({ position: 'fixed', bottom: 0, right: 0 });
-    });
+    scrollButton.css({ display: 'none' });
+    scrollButton.css({ position: 'fixed', bottom: 0, right: 0 });
   });
   $(window).scrollTop(0);
   showForm();
@@ -215,7 +213,7 @@ const handleScrollPosition = function(scrollPosition, newTweet) {
   // for displaying scrollToTop button
   if (scrollPosition > 100) {
     $('.new-tweet-button').slideUp();
-    $('#scrollToTop').slideDown();
+    $('#scroll-to-top').slideDown();
   } else if (scrollPosition < 100) {
 
     // evaluate display property of the new tweet form
@@ -223,7 +221,7 @@ const handleScrollPosition = function(scrollPosition, newTweet) {
       // only slide down the new tweet button if the form is not already displayed
       $('.new-tweet-button').slideDown();
     }
-    $('#scrollToTop').slideUp();
+    $('#scroll-to-top').slideUp();
   }
 
   // for changing logo colour
