@@ -21,6 +21,12 @@ $(document).ready(() => {
     showForm();
   });
 
+  $('input').hover((event) => {
+    $(event.target).css({ 'box-shadow': '#4056a1 3px 3px', 'background': 'white', 'color': 'coral', 'outline': 'none'});
+  }, (event) => {
+    $(event.target).css({ 'box-shadow': 'none', 'background': '#4056a1', 'color': 'white', 'outline': 'none'});
+  });
+
   // scroll position handling
   $(window).scroll(function() {
     let newTweet = document.querySelector('.new-tweet');
@@ -200,7 +206,7 @@ const scrollToTop = function(scrollButton) {
     });
   });
   $(window).scrollTop(0);
-  $('.new-tweet').slideDown();
+  showForm();
 };
 
 

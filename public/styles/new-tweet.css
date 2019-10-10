@@ -32,6 +32,7 @@ input {
   color: #ffffff;
   font-family: 'Bungee', cursive;
   float: left;
+  outline: none;
 }
 
 .counter {
