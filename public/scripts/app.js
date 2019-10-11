@@ -18,7 +18,7 @@ $(document).ready(() => {
 
   // new tweet button click handling
   $('.new-tweet-button').on('click', () => {
-    showForm();
+    toggleForm();
   });
 
   // submit tweet hover animation
@@ -172,15 +172,13 @@ const loadTweets = function() {
 };
 
 
-const showForm = function() {
-  // shows the compose tweet form and shifts cursor focus to the textarea
+const toggleForm = function() {
+  // shows/hides the compose tweet form and shifts cursor focus to the textarea
 
-  $('.new-tweet').slideDown(() => {
+  $('.new-tweet').slideToggle(() => {
     $('#textarea').focus();
   });
-  $('.new-tweet-button').slideUp();
 };
-
 
 const isValidTweet = function() {
   // returns true if tweet is valid
@@ -206,8 +204,9 @@ const scrollToTop = function(scrollButton) {
     scrollButton.css({ display: 'none' });
     scrollButton.css({ position: 'fixed', bottom: 0, right: 0 });
   });
+  $('.new-tweet-button').css({display: 'block'});
   $(window).scrollTop(0);
-  showForm();
+  toggleForm();
 };
 
 
