@@ -60,6 +60,8 @@ const submitNewTweet = function() {
 
     const serializedForm = $(event.target).serialize();
     clearForm();
+    const textarea = window.document.querySelector("textarea");
+    textarea.style.height = "2.1em";
 
     $('.new-tweet').slideUp();
 
@@ -227,9 +229,15 @@ const handleScrollPosition = function(scrollPosition, newTweet) {
   // for changing logo colour
   if (scrollPosition > 350) {
     if ($(window).width() < 768) {
+      $('.new-tweet').slideUp();
       $('#tweeter-logo').css({ color: 'coral' });
     }
   } else if (scrollPosition < 350) {
     $('#tweeter-logo').css({ color: 'white' });
+  }
+  if (scrollPosition > 100) {
+    if ($(window).width() > 768) {
+      $('.new-tweet').slideUp();
+    }
   }
 };

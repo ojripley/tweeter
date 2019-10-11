@@ -56,10 +56,13 @@
 }
 
 .tweet .retweet-button {
+  background-color: #f4f1ec;
   color: #4056a1;
   float: right;
   margin-right: 3px;
   margin-left: 3px;
+  cursor: pointer;
+  outline: none;  
 }
 
 .tweet .flag-button {

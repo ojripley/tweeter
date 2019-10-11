@@ -1,7 +1,11 @@
 // document ready function lets us know when the DOM has loaded
 $(document).ready(function() {
+  const textarea = window.document.querySelector("textarea");
   $('#textarea').on('input', function() {
 
+    textarea.style.height = "2.1em";
+    textarea.style.height = (textarea.scrollHeight) + "px";
+  
     // determine number of characters remaining
     let remaining = (140 - $(this).val().length);
 
