@@ -227,17 +227,19 @@ const handleScrollPosition = function(scrollPosition, newTweet) {
   }
 
   // for changing logo colour
-  if (scrollPosition > 350) {
+  if (scrollPosition > 355) {
     if ($(window).width() < 768) {
       $('.new-tweet').slideUp();
+      $('#error-message').slideUp();
       $('#tweeter-logo').css({ color: 'coral' });
     }
   } else if (scrollPosition < 350) {
     $('#tweeter-logo').css({ color: 'white' });
   }
   if (scrollPosition > 100) {
-    if ($(window).width() > 768) {
+    if ($(window).width() >= 768) {
       $('.new-tweet').slideUp();
+      $('#error-message').slideUp();
     }
   }
 };
